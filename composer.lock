@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27af06e68a7b7eef5109d68006e0d2b2",
-    "content-hash": "76036da3b5b55b91dbe1e1affa01bf9e",
+    "hash": "d019a40a59a5cb2fc9bc96a3c5837160",
+    "content-hash": "e581c6e6f384f9e565a8f9759370c373",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -305,6 +305,47 @@
                 "tokenizer"
             ],
             "time": "2016-12-07 09:37:55"
+        },
+        {
+            "name": "joomtriggers/ideamart-php",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joomtriggers/ideamart-php.git",
+                "reference": "fc679eae678519e712a0786f6f4576b3bcfc64c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joomtriggers/ideamart-php/zipball/fc679eae678519e712a0786f6f4576b3bcfc64c0",
+                "reference": "fc679eae678519e712a0786f6f4576b3bcfc64c0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "*",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Joomtriggers\\Ideamart\\Tests\\": "tests",
+                    "Joomtriggers\\Ideamart\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gnanakeethan Balasubramaniam",
+                    "email": "gnanakeethan@gmail.com"
+                }
+            ],
+            "description": "Flexible Ideamart PHP API",
+            "time": "2016-01-19 11:34:11"
         },
         {
             "name": "laravel/framework",
