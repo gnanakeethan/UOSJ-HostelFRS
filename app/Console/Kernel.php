@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        \App\Console\Commands\SendTotalCommand::class,
         //
     ];
 
@@ -25,7 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')
+        // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('total:send')
+            ->cron("0 */6 * * *");
     }
 
     /**
