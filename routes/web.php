@@ -17,9 +17,8 @@ Route::get('/', function () {
 });
 Route::any('receive',function(){
 
-    $handler = new Handler();
-    $message = $handler->sms()->receive()->getMessage();
-    \Log::info($message);
+                $post = file_get_contents('php://input');
+                \Log::info($post);
 });
 
 Route::get('/send',function(){
