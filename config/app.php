@@ -168,7 +168,6 @@ return [
          */
 
           Kodeine\Acl\AclServiceProvider::class,
-          Barryvdh\Cors\ServiceProvider::class,
 
         //
 

@@ -16,9 +16,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::any('receive',function(){
-
-                $post = file_get_contents('php://input');
-                \Log::info($post);
+    $handler = new Handler();
+    $message = $handler->sms()->receive()->getMessage();
+    info($message);
+    return $message;
 });
 
 Route::get('/send',function(){
@@ -34,8 +35,8 @@ Route::get('/send',function(){
         ->addSubscriber('tel:94773456799')
         ->send();
 
-});
 
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
