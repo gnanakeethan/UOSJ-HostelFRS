@@ -15,18 +15,25 @@ use Joomtriggers\Ideamart\Handler;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::any('receive',function(){
+
+    $handler = new Handler();
+    $message = $handler->sms()->receive()->getMessage();
+    \Log::info($message);
+});
+
 Route::get('/send',function(){
 
-$handler = new Handler();
-$handler->sms()
-    ->setServer("http://localhost:7000/sms/send")
-    ->setApplication("APP_000001")
-    ->setSecret("password")
-    ->setMessage("Message")
-    ->addSubscriber('tel:94773456789')
-    ->addSubscriber('tel:94773452222')
-    ->addSubscriber('tel:94773456799')
-    ->send();
+    $handler = new Handler();
+    $handler->sms()
+        ->setServer("http://localhost:7000/sms/send")
+        ->setApplication("APP_000001")
+        ->setSecret("password")
+        ->setMessage("Message")
+        ->addSubscriber('tel:94773456789')
+        ->addSubscriber('tel:94773452222')
+        ->addSubscriber('tel:94773456799')
+        ->send();
 
 });
 
