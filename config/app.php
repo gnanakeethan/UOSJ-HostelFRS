@@ -167,6 +167,8 @@ return [
          * Package Service Providers...
          */
 
+          Kodeine\Acl\AclServiceProvider::class,
+
         //
 
         /*

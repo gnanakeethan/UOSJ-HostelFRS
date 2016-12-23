@@ -6,8 +6,11 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "joomtriggers/ideamart-php": "^1.1",
-        "laravel/framework": "5.3.*"
+        "doctrine/dbal": "^2.5",
+        "joomtriggers/ideamart-php": "^1.1.1",
+        "kodeine/laravel-acl": "~1.0@dev",
+        "laravel/framework": "5.3.*",
+        "watson/bootstrap-form": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
