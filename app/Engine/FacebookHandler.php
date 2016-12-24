@@ -23,18 +23,18 @@ class FacebookHandler extends BaseHandler
     public function handle(\Casperlaitw\LaravelFbMessenger\Messages\ReceiveMessage $message)
     {
         info($msg = $message->getMessage());
-        if (!substr_count($msg, "wtf")) {
-            $this->send(new Text($message->getSender(), "I am getting ready. Talk to me later or send the passphrase"));
-        } else {
-            $this->send(new Text($message->getSender(), "What the hell I should do now"));
-        }
+//        if (!substr_count($msg, "wtf")) {
+//            $this->send(new Text($message->getSender(), "I am getting ready. Talk to me later or send the passphrase"));
+//        } else {
+//            $this->send(new Text($message->getSender(), "What the hell I should do now"));
+//        }
 
         $engine = new Engine();
         $engine->messageFrom('facebook')
+            ->setSender($message->getSender())
             ->setMessage($message->getMessage())
             ->decodeAndProcess();
         $this->send(new Text($message->getSender(), $engine->getResult()));
-
-        // TODO: Implement handle() method.
     }
+
 }

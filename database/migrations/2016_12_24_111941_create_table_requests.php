@@ -19,8 +19,8 @@ class CreateTableRequests extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('room_id');
             $table->date('queued_for');
-            $table->enum('day_part', ['breakfast', 'lunch', 'dinner']);
-            $table->tinyInteger('count');
+            $table->enum('day_part', ['morning', 'lunch', 'night']);
+            $table->tinyInteger('count')->nullable()->default(null);
             $table->timestamps();
         });
     }

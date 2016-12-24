@@ -1,5 +1,6 @@
 <?php
 
+use App\Room;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -16,12 +17,14 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(RoleTableSeeder::class);
 
+        Room::create(['name'=>'18','maximum' => '13']);
 
-        $admin = User::create(['first_name'=>'Admin','username'=>'gnanakeethan','email'=>'gnanakeethan@gmail.com','password'=>bcrypt('123456'),'facebook_id'=>'1183510155031384']);
+        $admin = User::create(['first_name' => 'Admin', 'username' => 'gnanakeethan', 'email' => 'gnanakeethan@gmail.com', 'password' => bcrypt('123456'), 'facebook_id' => '1183510155031384','room_id'=>1]);
         $admin->assignRole('superadmin');
 
-        $admin = User::create(['first_name'=>'Admin','username'=>'admin','email'=>'admin@hostels.joomtriggers.com','password'=>bcrypt('123123')]);
+        $admin = User::create(['first_name' => 'Admin', 'username' => 'admin', 'email' => 'admin@hostels.joomtriggers.com', 'password' => bcrypt('123123')]);
         $admin->assignRole('admin');
+
 
     }
 }
