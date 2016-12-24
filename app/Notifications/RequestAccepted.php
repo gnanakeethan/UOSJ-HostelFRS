@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -39,7 +40,10 @@ class RequestAccepted extends Notification
     public function toIdeamart($notifiable)
     {
         return (new IdeamartMessage)
-            ->content("Request Accepted");
+            ->content("Request Accepted".Carbon::now()->toDateTimeString());
+    }
+    public function toMessenger($messenger){
+        
     }
 
 }
