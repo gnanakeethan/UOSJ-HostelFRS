@@ -15,7 +15,7 @@ use Joomtriggers\Ideamart\Handler;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::any('receive',function(){
+Route::post('receive',function(){
     $handler = new Handler();
     $message = $handler->sms()->receive()->getMessage();
     info($message);
