@@ -170,7 +170,6 @@ return [
         Kodeine\Acl\AclServiceProvider::class,
         NotificationChannels\Ideamart\IdeamartServiceProvider::class,
         NotificationChannels\Facebook\FacebookServiceProvider::class,
-
         Casperlaitw\LaravelFbMessenger\LaravelFbMessengerServiceProvider::class,
         //
 

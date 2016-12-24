@@ -12,8 +12,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         \Illuminate\Database\Eloquent\Model::unguard();
+        $this->call(PermissionTableSeeder::class);
+        $this->call(RoleTableSeeder::class);
 
-        $users = factory(App\User::class, 30)->create();
+
+        $admin = User::create(['name'=>'Admin','email'=>'gnanakeethan@gmail.com','password'=>bcrypt('123456')]);
+        $admin->assignRole('superadmin');
+
+        $admin = User::create(['name'=>'Admin','email'=>'admin@hostels.joomtriggers.com','password'=>bcrypt('123123')]);
+        $admin->assignRole('admin');
 
     }
 }

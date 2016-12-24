@@ -8,8 +8,8 @@ return [
      * to package's model. You can define your model here.
      */
 
-    'role'       => 'Kodeine\Acl\Models\Eloquent\Role',
-    'permission' => 'Kodeine\Acl\Models\Eloquent\Permission',
+    'role'       => \App\Role::class,
+    'permission' => \App\Permission::class,
 
     /**
      * Most Permissive Wins right
@@ -19,12 +19,12 @@ return [
      * wins the race, ie the most permissive wins.
      */
 
-    'most_permissive_wins'       => false,
+    'most_permissive_wins' => FALSE,
 
     /**
      * Cache Minutes
      * Set the minutes that roles and permissions will be cached.
      */
-		
+
     'cacheMinutes' => 1,
 ];

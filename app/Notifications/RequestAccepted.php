@@ -37,8 +37,17 @@ class RequestAccepted extends Notification
      */
     public function via($notifiable)
     {
+        $channels = [];
+        $channels[] = isset($notifiable->facebook_id) ? FacebookChannel::class : NULL;
+        $channels[] = isset($notifiable->ideamart_id) ? IdeamartChannel::class : NULL;
+//        $channels[] = isset($notifiable->email) ? 'mail' : NULL;
 
-        return [IdeamartChannel::class, FacebookChannel::class];
+        return array_unique($channels);
+    }
+
+    public function toMail($notifiable)
+    {
+        return (new MailMessage())->to($notifiable->email)->line("Line");
     }
 
     public function toIdeamart($notifiable)
