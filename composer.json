@@ -10,7 +10,7 @@
   "repositories": [
     {
       "type": "git",
-      "url": "../ideamart-notification"
+      "url": "https://github.com/joomtriggers/ideamart-notification"
     }
   ],
   "require": {

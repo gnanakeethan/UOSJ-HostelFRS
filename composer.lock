@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6158792c09317386f0669cb4134c557c",
-    "content-hash": "1e6f2f01bbadd305e55cde31a7b144b1",
+    "hash": "fd85b36bccdf39207933e14a8a595699",
+    "content-hash": "56b806bb08dfe2601333eaa510250fa3",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -806,7 +806,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "../ideamart-notification",
+                "url": "https://github.com/joomtriggers/ideamart-notification",
                 "reference": "93f757af095d1ff3b469abbc2515ae0cf2790a71"
             },
             "require": {
