@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "875795640050410eb3bb933b52128a44",
-    "content-hash": "39632812f6d5b055d34606bea31e7c06",
+    "hash": "6158792c09317386f0669cb4134c557c",
+    "content-hash": "1e6f2f01bbadd305e55cde31a7b144b1",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -800,6 +800,54 @@
                 "security"
             ],
             "time": "2016-12-08 00:29:54"
+        },
+        {
+            "name": "laravel-notification-channels/ideamart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "../ideamart-notification",
+                "reference": "93f757af095d1ff3b469abbc2515ae0cf2790a71"
+            },
+            "require": {
+                "illuminate/notifications": "^5.3",
+                "illuminate/support": "^5.1|^5.2|^5.3",
+                "joomtriggers/ideamart-php": "^1.1",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "NotificationChannels\\Ideamart\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "NotificationChannels\\Ideamart\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gnanakeethan Balasubramaniam",
+                    "email": "gnanam@boun.cr",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Ideamart Notification Channel",
+            "homepage": "https://github.com/laravel-notification-channels/ideamart",
+            "time": "2016-12-24 02:48:25"
         },
         {
             "name": "laravel/framework",
@@ -4049,6 +4097,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "laravel-notification-channels/ideamart": 20,
         "kodeine/laravel-acl": 20
     },
     "prefer-stable": false,

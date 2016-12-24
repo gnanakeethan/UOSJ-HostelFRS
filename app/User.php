@@ -8,7 +8,7 @@ use Kodeine\Acl\Traits\HasRole;
 
 class User extends Authenticatable
 {
-    use Notifiable,HasRole;
+    use Notifiable, HasRole;
 
     /**
      * The attributes that are mass assignable.
@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function routeNotificationForIdeamart()
+    {
+        return "tel:94771234567";
+    }
 }
