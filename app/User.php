@@ -30,6 +30,11 @@ class User extends Authenticatable
 
     public function routeNotificationForIdeamart()
     {
-        return "tel:94771234567";
+        return $this->ideamart_id;
+    }
+
+    public function routeNotificationForFacebook()
+    {
+        return $this->facebook_id;
     }
 }

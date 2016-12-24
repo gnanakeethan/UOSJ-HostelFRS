@@ -7,6 +7,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\Facebook\Attachment\Button;
+use NotificationChannels\Facebook\FacebookChannel;
+use NotificationChannels\Facebook\FacebookMessage;
+use NotificationChannels\Facebook\NotificationType;
 use NotificationChannels\Ideamart\IdeamartChannel;
 use NotificationChannels\Ideamart\IdeamartMessage;
 
@@ -34,16 +38,21 @@ class RequestAccepted extends Notification
     public function via($notifiable)
     {
 
-        return [IdeamartChannel::class];
+        return [IdeamartChannel::class, FacebookChannel::class];
     }
 
     public function toIdeamart($notifiable)
     {
         return (new IdeamartMessage)
-            ->content("Request Accepted".Carbon::now()->toDateTimeString());
+            ->content("Request Accepted" . Carbon::now()->toDateTimeString());
     }
-    public function toMessenger($messenger){
-        
+
+    public function toFacebook($notifiable)
+    {
+
+        return FacebookMessage::create()
+            ->to('1183510155031384')// Optional
+            ->text('Success in Notification');
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Joomtriggers\Ideamart\Handler;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +16,19 @@ use Joomtriggers\Ideamart\Handler;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('receive',function(){
+Route::post('receive', function () {
     $handler = new Handler();
     $message = $handler->sms()->receive()->getMessage();
     info($message);
+
     return $message;
 });
+Route::get('pp',function(){
+   return 'The Information We Collect is limited to very few people who are bound confidentially to accept them. We will not use any information for any other purpose than to order and provision meals ' ;
+});
 
-Route::get('/send',function(){
-    $users = \App\User::all();
+Route::get('/send', function () {
+    $users = \App\User::find(1);
     \Illuminate\Support\Facades\Notification::send($users, new \App\Notifications\RequestAccepted());
 });
 Auth::routes();

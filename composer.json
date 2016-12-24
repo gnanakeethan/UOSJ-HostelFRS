@@ -15,10 +15,12 @@
   ],
   "require": {
     "php": ">=5.6.4",
+    "casperlaitw/laravel-fb-messenger": "^1.2",
     "doctrine/dbal": "^2.5",
     "joomtriggers/ideamart-php": "^1.1.1",
-    "laravel-notification-channels/ideamart": "dev-master",
     "kodeine/laravel-acl": "~1.0@dev",
+    "laravel-notification-channels/facebook": "^0.0.1",
+    "laravel-notification-channels/ideamart": "dev-master",
     "laravel/framework": "5.3.*",
     "watson/bootstrap-form": "^1.0"
   },

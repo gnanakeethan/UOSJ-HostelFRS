@@ -39,5 +39,8 @@ return [
         'password'    => 'password',
         'server'=>'http://localhost:7000/sms/send/'
     ],
+    'facebook' => [
+        'page-token' => env('FACEBOOK_PAGE_TOKEN', 'EAAJZCQWjqNYIBAP7HzpPOChsEPYomINIAGrG5mq1YeFH6SGVJANnhj4d5xqLRUEd1dc0rIEPVDIFuQupZCzRJotAnMdLj5xmJF9OQWlzMFd9xRGxDVobvCrMryiBGCQ80WsUrtUeLRpr65Sh8XINc5wQXBg82tJtOJoop6hAZDZD')
+    ],
 
 ];
