@@ -16,6 +16,7 @@ class AddFieldsIdeamartFacebookUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('ideamart_id');
             $table->string('facebook_id');
+            $table->string('room_id');
         });
     }
 
@@ -29,6 +30,7 @@ class AddFieldsIdeamartFacebookUsersTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('ideamart_id');
             $table->dropColumn('facebook_id');
+            $table->dropColumn('room_id');
             //
         });
     }
