@@ -14,9 +14,9 @@ class AddFieldsIdeamartFacebookUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('ideamart_id');
-            $table->string('facebook_id');
-            $table->string('room_id');
+            $table->string('ideamart_id')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->string('room_id')->nullable();
         });
     }
 

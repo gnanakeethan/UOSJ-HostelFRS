@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,10 +17,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleTableSeeder::class);
 
 
-        $admin = User::create(['name'=>'Admin','email'=>'gnanakeethan@gmail.com','password'=>bcrypt('123456')]);
+        $admin = User::create(['first_name'=>'Admin','username'=>'gnanakeethan','email'=>'gnanakeethan@gmail.com','password'=>bcrypt('123456'),'facebook_id'=>'1183510155031384']);
         $admin->assignRole('superadmin');
 
-        $admin = User::create(['name'=>'Admin','email'=>'admin@hostels.joomtriggers.com','password'=>bcrypt('123123')]);
+        $admin = User::create(['first_name'=>'Admin','username'=>'admin','email'=>'admin@hostels.joomtriggers.com','password'=>bcrypt('123123')]);
         $admin->assignRole('admin');
 
     }

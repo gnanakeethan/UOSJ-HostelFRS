@@ -23,12 +23,16 @@ Route::post('receive', function () {
 
     return $message;
 });
+//Route::any('hooked', function () {
+//    info(\Illuminate\Support\Facades\Request::all());
+//    return \Illuminate\Support\Facades\Request::get('hub_challenge');
+//});
 Route::get('pp',function(){
    return 'The Information We Collect is limited to very few people who are bound confidentially to accept them. We will not use any information for any other purpose than to order and provision meals ' ;
 });
 
 Route::get('/send', function () {
-    $users = \App\User::find(1);
+    $users = \App\User::all();
     \Illuminate\Support\Facades\Notification::send($users, new \App\Notifications\RequestAccepted());
 });
 Auth::routes();

@@ -9,6 +9,6 @@ return [
     'handlers'     => [
         FacebookHandler::class,
     ],
-    'custom_url'   => '/hookedup',
+    'custom_url'   => '/hooked',
     'postbacks'    => [],
 ];

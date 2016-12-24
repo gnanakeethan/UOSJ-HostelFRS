@@ -14,17 +14,23 @@ class Engine
 
     public function messageFrom($provider)
     {
-
+return $this;
     }
 
     public function setMessage($message)
     {
+        return $this;
 
     }
 
     public function decodeAndProcess()
     {
+        return $this;
 
+    }
+
+    public function getResult()
+    {
     }
 
 }
