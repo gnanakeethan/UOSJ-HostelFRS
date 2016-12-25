@@ -24,13 +24,14 @@ class Counter
     {
     }
 
-    public function count($time)
+    public function count($time = NULL)
     {
         $time = $this->findTime($time);
         if (!auth()->check()) {
             return "Unauthorized";
         }
         if (auth()->user()->hasRole('admin')) {
+
             //TODO: count all
         } else {
             //TODO: count roommates
@@ -39,7 +40,7 @@ class Counter
         return "counted";
     }
 
-    public function add($count = 1, $time)
+    public function add($count = 1, $time = NULL)
     {
         $time = $this->findTime($time);
         if (!auth()->check()) {
@@ -63,13 +64,13 @@ class Counter
             $request->save();
             $room_count = $room->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
 
-            return "added to queued for {$time[0]->toFormattedDateString()} in {$time[1]}.Your Total is {$request->count}.Your Room is No. {$room->name}. Room Total {$room_count}";
+            return "Added to Queue on {$time[0]->toFormattedDateString()} for {$time[1]}.Your Total is {$request->count}.Your Room is No. {$room->name}. Room Total {$room_count}";
         }
 
 
     }
 
-    public function subtract($count = 1, $time)
+    public function subtract($count = 1, $time = NULL)
     {
         $time = $this->findTime($time);
         if (!auth()->check()) {
@@ -95,7 +96,7 @@ class Counter
             $request->save();
             $room_count = $room->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
 
-            return "removed queued for {$time[0]->toFormattedDateString()} in {$time[1]}.Your Total is {$request->count}. Your Room is No.{$room->name}. Room Total {$room_count}";
+            return "Removed from Queue on {$time[0]->toFormattedDateString()} for {$time[1]}.Your Total is {$request->count}. Your Room is No.{$room->name}. Room Total {$room_count}";
         }
 
     }
@@ -116,6 +117,7 @@ class Counter
             return [$today, $day_part];
         } elseif ($lunch->isFuture() && ($time == "lunch" || $morning->isPast())) {
             $day_part = "lunch";
+
             return [$today, $day_part];
         } elseif (($night->isFuture() || $time == "night") && ($lunch->isPast() && $morning->isPast())) {
             $day_part = "night";

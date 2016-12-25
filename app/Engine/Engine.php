@@ -45,7 +45,7 @@ class Engine
         $user = User::where("{$this->provider}_id", '=', $this->sender)->first();
         if ($user)
             Auth::login($user);
-        $msg = explode(" ", $this->message);
+        $msg = explode(" ", strtolower($this->message));
         info($msg);
         switch ($msg[0]) {
             case "count":
