@@ -57,10 +57,6 @@ class Engine
             case "add":
                 $this->result = $this->counter->add(isset($msg[1]) ? $msg[1] : "", isset($msg[2]) ? $msg[2] : "");
                 break;
-            default:
-                if ($msg[0])
-                    $this->result = $this->counter->add(isset($msg[0]) ? $msg[0] : "");
-                break;
         }
 
         return $this;
@@ -76,7 +72,9 @@ class Engine
 
     public function getResult()
     {
-        return "Request Accepted.You told me {$this->message}.It resulted in {$this->result}.";
+        if ($this->result)
+            return "Request Accepted.You told me {$this->message}.It resulted in {$this->result}.";
+        return "";
     }
 
 }

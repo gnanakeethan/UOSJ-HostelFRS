@@ -24,14 +24,24 @@ class Counter
     {
     }
 
+    public function listing($time=null){
+
+    }
     public function count($time = NULL)
     {
         $time = $this->findTime($time);
         if (!auth()->check()) {
             return "Unauthorized";
         }
-        if (auth()->user()->hasRole('admin')) {
+        info(auth()->user()->hasRole('admin|superadmin'));
+        if (auth()->user()->hasRole('admin|superadmin')) {
+            $rcount = 0;
+            $ucount = auth()->user()->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
 
+            if (auth()->user()->room_id)
+                $rcount = auth()->user()->room->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
+            $totalcount = Request::where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
+            return "Your Count $ucount. Your Room Count " . $rcount . ".Hostel Count $totalcount";
             //TODO: count all
         } else {
             //TODO: count roommates
@@ -105,25 +115,27 @@ class Counter
     {
 
         $today = Carbon::today()->startOfDay();
-        $night = Carbon::today()->startOfDay()->addHours(21);
+        $night = Carbon::today()->startOfDay()->addHours(19)->addMinutes(30);
         $morning = Carbon::today()->startOfDay()->addHours(6)->addMinutes(30);
         $lunch = Carbon::today()->startOfDay()->addHours(12);
-        info($night->isPast());
+        $day_part = $time;
         if (($morning->isFuture() && $today->isPast()) || ($night->isPast())) {
             if ($night->isPast())
                 $today->addDay();
             $day_part = "morning";
 
-            return [$today, $day_part];
-        } elseif ($lunch->isFuture() && ($time == "lunch" || $morning->isPast())) {
+        }
+        if ($lunch->isFuture() && ($time == "lunch" || $morning->isPast())) {
             $day_part = "lunch";
 
-            return [$today, $day_part];
-        } elseif (($night->isFuture() || $time == "night") && ($lunch->isPast() && $morning->isPast())) {
-            $day_part = "night";
-
-            return [$today, $day_part];
         }
+        if (($night->isFuture() && $time == "night") && ($lunch->isPast() || $morning->isPast())) {
+            $day_part = "night";
+        }
+        info('t' . $time);
+        info('t' . $day_part);
+
+        return [$today, $day_part];
 
     }
 }

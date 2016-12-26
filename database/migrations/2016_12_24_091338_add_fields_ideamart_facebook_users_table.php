@@ -17,6 +17,7 @@ class AddFieldsIdeamartFacebookUsersTable extends Migration
             $table->string('ideamart_id')->nullable();
             $table->string('facebook_id')->nullable();
             $table->string('room_id')->nullable();
+            $table->string('identification_code')->nullable()->default(null);
         });
     }
 
@@ -31,6 +32,7 @@ class AddFieldsIdeamartFacebookUsersTable extends Migration
             $table->dropColumn('ideamart_id');
             $table->dropColumn('facebook_id');
             $table->dropColumn('room_id');
+            $table->dropColumn('identification_code');
             //
         });
     }

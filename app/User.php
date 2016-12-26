@@ -37,7 +37,14 @@ class User extends Authenticatable
     {
         return $this->facebook_id;
     }
-    public function room(){
+
+    public function room()
+    {
         return $this->belongsTo(Room::class);
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class);
     }
 }
