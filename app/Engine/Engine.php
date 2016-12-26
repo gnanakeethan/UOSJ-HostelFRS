@@ -48,16 +48,21 @@ class Engine
         $msg = explode(" ", strtolower($this->message));
         info($msg);
         switch ($msg[0]) {
-            case "count":
-                $this->result = $this->counter->count(isset($msg[1]) ? $msg[1] : "", isset($msg[2]) ? $msg[2] : "");
-                break;
             case "less":
                 $this->result = $this->counter->subtract(isset($msg[1]) ? $msg[1] : "", isset($msg[2]) ? $msg[2] : "");
                 break;
             case "add":
                 $this->result = $this->counter->add(isset($msg[1]) ? $msg[1] : "", isset($msg[2]) ? $msg[2] : "");
                 break;
+            case "list":
+                $this->result = $this->counter->listing(isset($msg[1]) ? $msg[1] : "");
+                break;
+            case "count":
+                $this->result = $this->counter->count(isset($msg[1]) ? $msg[1] : "");
+                break;
         }
+        if (!$this->result)
+            $this->result = "Please say add or less or count";
 
         return $this;
 
@@ -73,7 +78,8 @@ class Engine
     public function getResult()
     {
         if ($this->result)
-            return "Request Accepted.You told me {$this->message}.It resulted in {$this->result}.";
+            return "{$this->result}";
+
         return "";
     }
 

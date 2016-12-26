@@ -9,6 +9,7 @@
 namespace App\Engine;
 
 
+use App\Engine\Repositories\RequestRepository;
 use App\Request;
 use App\Room;
 use Carbon\Carbon;
@@ -24,12 +25,13 @@ class Counter
     {
     }
 
-    public function listing($time=null){
-
-    }
     public function count($time = NULL)
     {
-        $time = $this->findTime($time);
+        if (in_array($time, ['morning', 'night', 'lunch'])) {
+            $time = $this->findTime($time, 1);
+        } else {
+            $time = $this->findTime($time);
+        }
         if (!auth()->check()) {
             return "Unauthorized";
         }
@@ -37,17 +39,45 @@ class Counter
         if (auth()->user()->hasRole('admin|superadmin')) {
             $rcount = 0;
             $ucount = auth()->user()->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
-
             if (auth()->user()->room_id)
                 $rcount = auth()->user()->room->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
             $totalcount = Request::where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
-            return "Your Count $ucount. Your Room Count " . $rcount . ".Hostel Count $totalcount";
+
+            return ucwords($time[1]) . " for {$time[0]->toFormattedDateString()} .Your Count $ucount. Your Room Count " . $rcount . ".Hostel Count $totalcount";
             //TODO: count all
         } else {
+            $rcount = 0;
+            $ucount = auth()->user()->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
+            if (auth()->user()->room_id)
+                $rcount = auth()->user()->room->requests()->where('queued_for', '=', $time[0])->where('day_part', '=', $time[1])->sum('count');
+
+            return ucwords($time[1]) . " for {$time[0]->toFormattedDateString()} .Your Count $ucount. Your Room Count " . $rcount;
+
             //TODO: count roommates
         }
 
-        return "counted";
+        return ".";
+    }
+
+    public function listing($time = NULL)
+    {
+        if (in_array($time, ['morning', 'night', 'lunch'])) {
+            $time = $this->findTime($time, 1);
+        } else {
+            $time = $this->findTime($time);
+        }
+        if (!auth()->check()) {
+            return "Unauthorized";
+        }
+        info(auth()->user()->hasRole('admin|superadmin'));
+        if (auth()->user()->hasRole('admin|superadmin')) {
+            return app(RequestRepository::class)->getFormattedList($time[0], $time[1], TRUE);
+        } else {
+            return app(RequestRepository::class)->getFormattedList($time[0], $time[1]);
+        }
+
+
+        return ".";
     }
 
     public function add($count = 1, $time = NULL)
@@ -80,6 +110,7 @@ class Counter
 
     }
 
+
     public function subtract($count = 1, $time = NULL)
     {
         $time = $this->findTime($time);
@@ -111,14 +142,18 @@ class Counter
 
     }
 
-    private function findTime($time)
+    private function findTime($time, $override = NULL)
     {
+
 
         $today = Carbon::today()->startOfDay();
         $night = Carbon::today()->startOfDay()->addHours(19)->addMinutes(30);
         $morning = Carbon::today()->startOfDay()->addHours(6)->addMinutes(30);
         $lunch = Carbon::today()->startOfDay()->addHours(12);
         $day_part = $time;
+        if ($override) {
+            return [$today, $day_part];
+        }
         if (($morning->isFuture() && $today->isPast()) || ($night->isPast())) {
             if ($night->isPast())
                 $today->addDay();

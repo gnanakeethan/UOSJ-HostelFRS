@@ -17,14 +17,16 @@ use NotificationChannels\Ideamart\IdeamartMessage;
 class RequestAccepted extends Notification
 {
     use Queueable;
+    protected $engine;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($engine)
     {
+        $this->engine = $engine;
         //
     }
 
@@ -40,7 +42,9 @@ class RequestAccepted extends Notification
         $channels = [];
         $channels[] = isset($notifiable->facebook_id) ? FacebookChannel::class : NULL;
         $channels[] = isset($notifiable->ideamart_id) ? IdeamartChannel::class : NULL;
+
 //        $channels[] = isset($notifiable->email) ? 'mail' : NULL;
+        info($channels);
 
         return array_unique($channels);
     }
@@ -52,16 +56,16 @@ class RequestAccepted extends Notification
 
     public function toIdeamart($notifiable)
     {
-        return (new IdeamartMessage)
-            ->content("Request Accepted" . Carbon::now()->toDateTimeString());
+
+        return IdeamartMessage::create($this->engine->getResult());
     }
 
     public function toFacebook($notifiable)
     {
 
         return FacebookMessage::create()
-            ->to('1183510155031384')// Optional
-            ->text('Success in Notification');
+            ->to($notifiable->facebook_id)// Optional
+            ->text($this->engine->getResult());
     }
 
 }
