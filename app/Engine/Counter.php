@@ -86,6 +86,7 @@ class Counter
         if (!auth()->check()) {
             return "Unauthorized";
         }
+        info($time);
         if ($room_id = auth()->user()->room_id) {
             $room = Room::find($room_id);
             $request = Request::firstOrCreate(['user_id'    => auth()->user()->id,
@@ -154,11 +155,11 @@ class Counter
         if ($override) {
             return [$today, $day_part];
         }
-        if (($morning->isFuture() && $today->isPast()) || ($night->isPast())) {
+        if (($morning->isFuture() && $lunch->isPast()) || ($night->isPast())) {
             if ($night->isPast())
                 $today->addDay();
             $day_part = "morning";
-
+            info('pased');
         }
         if ($lunch->isFuture() && ($time == "lunch" || $morning->isPast())) {
             $day_part = "lunch";
@@ -166,6 +167,10 @@ class Counter
         }
         if (($night->isFuture() && $time == "night") && ($lunch->isPast() || $morning->isPast())) {
             $day_part = "night";
+        }
+        if (!$day_part) {
+            $day_part = "morning";
+            $today->addDay();
         }
         info('t' . $time);
         info('t' . $day_part);
